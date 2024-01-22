@@ -1,0 +1,241 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.navigation_logged {
+  width: 100%;
+}
+
+.navigation__list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 30px;
+  transition: all .4s linear;
+  z-index: 3;
+}
+
+.navigation__list_logged {
+  margin-left: 44px;
+  width: 100%;
+  gap: 16px
+}
+
+.navigation__item_acc {
+  position: absolute;
+  right: 0;
+}
+
+.navigation__link {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;
+  transition: opacity 0.2s linear;
+}
+
+.navigation__link:hover {
+  opacity: .7;
+}
+
+.navigation__link_active_desktop {
+  font-weight: 500;
+}
+
+.navigation__link_active_mobile {
+  border-bottom: 2px solid #fff;
+}
+
+.navigation__acc-link_active {
+  border: 1px solid white;
+
+}
+
+.navigation__link.navigation__link_about-proj {
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+}
+
+.navigation__link_signin {
+  color: black;
+  padding: 8px 20px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+}
+
+.navigation__link_type_account {
+  position: relative;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  margin-left: 24px;
+  padding-left: 15px;
+  padding-right: 36px;
+  min-height: 30px;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 40px;
+}
+
+.navigation__link_type_account::after {
+  position: absolute;
+  content: '';
+  top: 2px;
+  right: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  background-color: #313131;
+  background-image: url('../../images/profile.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.navigation__hamburger-button {
+  outline: none;
+  border: none;
+  display: none;
+  background-image: url(../../images/burger.svg);
+  background-color: transparent;
+  position: absolute;
+  background-repeat: no-repeat;
+  top: 15px;
+  right: 15px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 100;
+  padding: 0;
+  transition: all 0.4s linear;
+  background-size: contain;
+}
+
+.navigation__hamburger-button_active {
+  background-image: url(../../images/cross.svg);
+  width: 30px;
+  height: 30px;
+  top: 22px;
+  right: 22px;
+}
+
+@media screen and (max-width: 800px) {
+
+  .navigation__item_acc {
+    position: static;
+  }
+
+  .navigation__hamburger-button {
+    display: flex;
+  }
+
+  .navigation__link {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .navigation__link_type_account {
+    font-size: 13px;
+    line-height: 12px;
+  }
+
+  .navigation__list_logged {
+    gap: 28px;
+    position: absolute;
+    top: 0;
+    flex-direction: column;
+    height: 100vh;
+    width: 67%;
+    background-color: #202020;
+  }
+
+  .navigation__link_type_account {
+    margin: 0;
+  }
+
+  .navigation__item:last-child {
+    margin: auto 0 90px 0
+  }
+
+  .navigation__item:first-child {
+    margin-top: 159px;
+  }
+
+  .navigation__list_state_opened {
+    right: 0;
+    visibility: visible;
+  }
+
+  .navigation__list_state_closed {
+    right: -100%;
+    visibility: hidden;
+  }
+
+  .navigation_state_opened {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    justify-content: flex-end;
+    transition: all .3s ease;
+    z-index: 3;
+  }
+
+  .navigation_state_closed {
+    position: static;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navigation__hamburger-button {
+    width: 40px;
+    height: 43px;
+    right: 14px;
+    top: 15px;
+  }
+
+  .navigation__hamburger-button_active {
+    right: 13px;
+    top: 13px;
+    width: 32px;
+  }
+
+  .navigation__list {
+    gap: 14px;
+  }
+
+  .navigation__link.navigation__link_about-proj {
+    font-size: 10px;
+  }
+
+  .navigation__link_signin {
+    padding: 5px 12px;
+  }
+
+  .navigation__list_logged {
+    gap: 24px;
+    width: 100%;
+  }
+
+  .navigation__item:first-child {
+    margin-top: 144px;
+  }
+
+  .navigation__item:last-child {
+    margin-bottom: 46px;
+  }
+}
