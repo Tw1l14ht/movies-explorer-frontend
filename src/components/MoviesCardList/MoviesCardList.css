@@ -21,7 +21,7 @@
   justify-items: center;
 }
 
-.movies-card-list__show-more {
+.movies-card-list__more-btn {
   width: 320px;
   background-color: #2f2f2f;
   border-radius: 6px;
@@ -36,7 +36,7 @@
   transition: all 0.3s ease;
 }
 
-.movies-card-list__show-more:hover {
+.movies-card-list__more-btn:hover {
   opacity: .8;
 }
 
@@ -60,7 +60,7 @@
 }
 
 @media screen and (max-width: 650px) {
-  .movies-card-list__show-more {
+  .movies-card-list__more-btn {
     width: 240px;
   }
 }
@@ -75,7 +75,7 @@
     row-gap: 34px;
   }
 
-  .movies-card-list__show-more {
+  .movies-card-list__more-btn {
     margin-top: 60px;
   }
 }

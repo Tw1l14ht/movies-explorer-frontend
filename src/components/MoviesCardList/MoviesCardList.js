@@ -36,7 +36,7 @@ function MoviesCardList({ movies }) {
             .map((card) => <MoviesCard key={card._id} card={card} />)}
       </ul>
       {location.pathname === "/movies" && (
-        <button className="movies-card-list__show-more">Ещё</button>
+        <button className="movies-card-list__more-btn">Ещё</button>
       )}
     </section>
   )
