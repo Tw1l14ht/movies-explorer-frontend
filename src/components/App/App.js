@@ -5,7 +5,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import moviesData from '../../utils/movies';
-import { useState, useEffect } from 'react';
+import React from 'react';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
@@ -14,19 +14,19 @@ import NotFound from '../NotFound/NotFound';
 
 function App() {
   const navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [isNavBarOpened, setisNavBarOpened] = useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isNavBarOpened, setisNavBarOpened] = React.useState(false);
 
   function onClickBar(isNavBarOpened) {
     setisNavBarOpened(!isNavBarOpened);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMovies(moviesData);
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setSavedMovies(moviesData.filter((movie) => {
       return movie.saved
     }))

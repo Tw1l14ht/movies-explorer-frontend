@@ -2,7 +2,7 @@ import './Navigation.css';
 import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-function Navigation({ authorized, isNavBarOpened, onClickBar }) {
+function Navigation({ login, isNavBarOpened, onClickBar }) {
 
   const handleOnClickBar = () => {
     onClickBar(isNavBarOpened);
@@ -20,7 +20,7 @@ function Navigation({ authorized, isNavBarOpened, onClickBar }) {
   const activeNav = `navigation__link_active_${isNavBarOpened ? 'mobile' : 'desktop'}`;
   return (
     <>
-      {authorized ? (
+      {login ? (
         <nav className={`navigation navigation_logged  navigation_state_${isNavBarOpened ? 'opened' : 'closed'}`}>
           <button type="button" className={`navigation__hamburger-button navigation__hamburger-button_${isNavBarOpened ? "active" : ""}`} onClick={handleOnClickBar}>
             <span></span>

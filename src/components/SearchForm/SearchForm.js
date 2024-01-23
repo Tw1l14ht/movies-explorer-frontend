@@ -19,7 +19,7 @@ function SearchForm() {
       <span className="search__grey-line"></span>
       <FilterCheckbox />
     </section>
-    <span className="bottom-line"></span>
+    <span className="search__bottom-line"></span>
     </>
   );
 }

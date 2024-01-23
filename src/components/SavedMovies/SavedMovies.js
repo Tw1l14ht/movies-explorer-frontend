@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer.js';
 function SavedMovies({ movies, onClickBar, isNavBarOpened }) {
   return (
     <>
-      <Header themeDark={true} authorized={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
+      <Header theme={true} login={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
       <main className="saved-movies">
         <SearchForm />
         <MoviesCardList movies={movies} />

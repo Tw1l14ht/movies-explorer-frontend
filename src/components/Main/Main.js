@@ -10,7 +10,8 @@ import Footer from '../Footer/Footer.js';
 export default function Main({ onClickBar, isNavBarOpened }) {
   return (
     <>
-    <Header themeDark={false} authorized={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
+    {/* Чтобы увидеть NavBar для не авторизованных login={false} */}
+    <Header theme={false} login={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
     <main className="main">
       <Promo />
       <AboutProject />

@@ -19,7 +19,7 @@ function Profile({ onClickBar, isNavBarOpened }) {
 
   return (
     <>
-      <Header themeDark={true} authorized={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
+      <Header theme={true} login={true} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
       <main className="profile">
         <form className="profile__form" name="profile" noValidate onSubmit={handleSubmit}>
           <h1 className="profile__title">Привет, Tw1l14ht!</h1>
