@@ -25,7 +25,7 @@ export default function Login() {
           <img src={logo} alt="Логотип" className="login__logo" />
         </Link>
         <h1 className="login__title">Рады видеть!</h1>
-        <div className="login__labels-container">
+        <div className="login__inputs-container">
           <label className="login__label">
             <span className="login__label-text">E-mail</span>
             <input name="email" className='login__input' onChange={handleEmailChange} value={email || ''} type="email" required />

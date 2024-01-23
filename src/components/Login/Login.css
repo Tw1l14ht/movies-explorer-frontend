@@ -52,7 +52,7 @@
     margin: 0;
 }
 
-.login__labels-container {
+.login__inputs-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -164,7 +164,7 @@
         flex: 1;
     }
 
-    .login__labels-container {
+    .login__inputs-container {
         margin-top: 30px;
         gap: 24px;
     }

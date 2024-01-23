@@ -28,7 +28,7 @@
   margin: 0;
 }
 
-.profile__labels-container {
+.profile__inputs-content {
   display: flex;
   flex-direction: column;
   width: 100%;

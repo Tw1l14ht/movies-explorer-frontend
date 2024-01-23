@@ -31,7 +31,7 @@ export default function Register() {
                     <img src={logo} alt="Логотип" className="register__logo" />
                 </Link>
                 <h1 className="register__title">Добро пожаловать!</h1>
-                <div className="register__labels-container">
+                <div className="register__inputs-container">
                     <label className="register__label">
                         <span className="register__label-text">Имя</span>
                         <input name="name" className="register__input" onChange={handleNameChange} value={name || ''} type="text" required minLength="2" maxLength="30" />

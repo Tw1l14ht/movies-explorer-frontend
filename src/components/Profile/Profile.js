@@ -23,7 +23,7 @@ function Profile({ onClickBar, isNavBarOpened }) {
       <main className="profile">
         <form className="profile__form" name="profile" noValidate onSubmit={handleSubmit}>
           <h1 className="profile__title">Привет, Tw1l14ht!</h1>
-          <div className="profile__labels-container">
+          <div className="profile__inputs-content">
             <label className="profile__label">
               <span className="profile__label-text">Имя</span>
               <input name="name" className="profile__input profile__input_type_name" onChange={handleNameChange} value={name || 'Tw1l14ht'} type="text" required minLength="2" maxLength="30" />

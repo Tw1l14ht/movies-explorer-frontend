@@ -50,7 +50,7 @@
   margin: 0;
 }
 
-.register__labels-container {
+.register__inputs-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -166,7 +166,7 @@
     flex: 1;
   }
 
-  .register__labels-container {
+  .register__inputs-container {
     margin-top: 30px;
     gap: 24px;
   }
