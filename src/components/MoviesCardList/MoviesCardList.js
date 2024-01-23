@@ -21,7 +21,7 @@ function MoviesCardList({ movies }) {
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {screenWidth > 917 &&
+        {screenWidth > 915 &&
           movies
             .slice(0, 16)
             .map((card) => <MoviesCard key={card._id} card={card} />)}
@@ -30,7 +30,7 @@ function MoviesCardList({ movies }) {
           movies
             .slice(0, 8)
             .map((card) => <MoviesCard key={card._id} card={card} />)}
-        {screenWidth < 584 &&
+        {screenWidth < 586 &&
           movies
             .slice(0, 5)
             .map((card) => <MoviesCard key={card._id} card={card} />)}
