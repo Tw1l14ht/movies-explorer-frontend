@@ -35,7 +35,7 @@
   padding: 0;
 }
 
-.portfolio__projects-item {
+.portfolio__projects-items {
   display: flex;
   padding-bottom: 19px;
   border-bottom: 1px solid #E6E6E6;
@@ -43,11 +43,11 @@
   transition: all 0.3s ease;
 }
 
-.portfolio__projects-item:hover {
+.portfolio__projects-items:hover {
   opacity: 0.7;
 }
 
-.portfolio__projects-item:last-child {
+.portfolio__projects-items:last-child {
   padding-bottom: 0;
   border: none;
 }

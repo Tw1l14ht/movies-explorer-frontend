@@ -4,7 +4,7 @@ import './App.css';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
-import moviesData from '../../utils/movies';
+import moviesList from '../../utils/movies';
 import React from 'react';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
@@ -14,7 +14,7 @@ import NotFound from '../NotFound/NotFound';
 
 function App() {
   const navigate = useNavigate();
-  const [movies, setMovies] = React.useState([]);
+  const [cardsMovies, setcardsMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isNavBarOpened, setisNavBarOpened] = React.useState(false);
 
@@ -23,12 +23,12 @@ function App() {
   };
 
   React.useEffect(() => {
-    setMovies(moviesData);
+    setcardsMovies(moviesList);
   }, []);
 
   React.useEffect(() => {
-    setSavedMovies(moviesData.filter((movie) => {
-      return movie.saved
+    setSavedMovies(moviesList.filter((cardMovie) => {
+      return cardMovie.saved
     }))
   }, []);
 
@@ -42,7 +42,7 @@ function App() {
         <Route path="/" element ={<Main onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />}/>
         <Route path="/signup" element={<Register />}/>
         <Route path="/signin" element={<Login />} />
-        <Route path="/movies" element={<Movies movies={movies} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />} />
+        <Route path="/movies" element={<Movies movies={cardsMovies} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />} />
         <Route path="/saved-movies" element={<SavedMovies movies={savedMovies} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />} />
         <Route path="/profile" element ={<Profile onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />}/>
         <Route path="*" element={<NotFound goHome={goHome} />}  />

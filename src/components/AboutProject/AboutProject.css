@@ -29,7 +29,7 @@
   width: 100%;
 }
 
-.about-project__definition-list {
+.about-project__content-list {
   margin: 0;
   display: flex;
   width: 100%;
@@ -39,11 +39,11 @@
   gap: 40px;
 }
 
-.about-project__definition-item {
+.about-project__content-item {
   max-width: 550px;
 }
 
-.about-project__definition-title {
+.about-project__content-title {
   margin: 0;
   font-size: 20px;
   font-style: normal;
@@ -53,7 +53,7 @@
   padding: 0;
 }
 
-.about-project__definition-description {
+.about-project__content-description {
   margin: 26px 0 0 0;
   font-size: 14px;
   font-style: normal;
@@ -62,7 +62,7 @@
 }
 
 
-.about-project__scheme {
+.about-project__timetable {
   display: flex;
   width: 100%;
 }
@@ -108,7 +108,7 @@
   background-color: #303030;
 }
 
-.about-project__scheme-title {
+.about-project__timetable-title {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -121,17 +121,17 @@
     padding: 90px 50px;
   }
 
-  .about-project__definition-description {
+  .about-project__content-description {
     font-size: 12px;
     line-height: 1.5;
     margin-top: 22px;
   }
 
-  .about-project__definition-item {
+  .about-project__content-item {
     max-width: 319px;
   }
 
-  .about-project__definition-list {
+  .about-project__content-list {
     padding-bottom: 93px;
     gap: 30px;
   }
@@ -140,7 +140,7 @@
     width: 21%;
   }
 
-  .about-project__scheme-title {
+  .about-project__timetable-title {
     font-weight: 400;
   }
 }
@@ -157,22 +157,22 @@
     padding-bottom: 28px;
   }
 
-  .about-project__definition-list {
+  .about-project__content-list {
     flex-direction: column;
     padding: 60px 0 60px;
     gap: 56px;
   }
 
-  .about-project__definition-item {
+  .about-project__content-item {
     max-width: 284px;
   }
 
-  .about-project__definition-title {
+  .about-project__content-title {
     font-size: 18px;
     line-height: 1.22;
   }
 
-  .about-project__definition-description {
+  .about-project__content-description {
     font-size: 11px;
     line-height: 1.45;
     margin-top: 16px;
@@ -190,7 +190,7 @@
     padding: 11px 0;
   }
 
-  .about-project__scheme-title {
+  .about-project__timetable-title {
     font-weight: 400;
     font-size: 11px;
     line-height: 1.18;
