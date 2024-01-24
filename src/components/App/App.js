@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={`app app__${isNavBarOpened ? 'noScroll' : ''}`}>
       <Routes>
         <Route path="/" element ={<Main onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />}/>
         <Route path="/signup" element={<Register />}/>

@@ -1,4 +1,11 @@
 .search {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-content {
   max-width: 1140px;
   margin-top: 70px;
   border-radius: 9px;
@@ -10,7 +17,7 @@
   flex-direction: row;
 }
 
-.search__form {
+.search-content__form {
   width: 100%;
   display: flex;
   position: relative;
@@ -18,7 +25,7 @@
   margin-right: 10px;
 }
 
-.search__input {
+.search-content__input {
   width: 100%;
   outline: none;
   padding: 26px 0 26px 63px;
@@ -33,11 +40,16 @@
   min-width: 419px;
 }
 
-.search__input::placeholder {
+.search-content__input:focus {
+  border: 1px solid #4286f486;
+  border-radius: 10px;
+}
+
+.search-content__input::placeholder {
   color: #8b8b8b;
 }
 
-.search__button {
+.search-content__button {
   border: none;
   color: #FFF;
   text-align: center;
@@ -52,11 +64,11 @@
   transition: opacity 0.3s ease;
 }
 
-.search__button:hover {
+.search-content__button:hover {
   opacity: 0.8;
 }
 
-.search__form::before {
+.search-content__form::before {
   content: "";
   width: 34px;
   height: 34px;
@@ -71,7 +83,7 @@
   box-sizing: border-box;
 }
 
-.search__grey-line {
+.search-content__grey-line {
   width: 1px;
   height: 40px;
   flex-shrink: 0;
@@ -89,7 +101,7 @@
 
 @media screen and (max-width: 1200px) {
 
-  .search,
+  .search-content,
   .search__bottom-line {
     max-width: calc(100% - 60px);
   }
@@ -97,7 +109,7 @@
 
 
 @media screen and (max-width: 800px) {
-  .search {
+  .search-content {
     margin-top: 80px;
   }
 
@@ -105,11 +117,11 @@
     margin-top: 109px;
   }
 
-  .search__form {
+  .search-content__form {
     margin-right: 0;
   }
 
-  .search__grey-line {
+  .search-content__grey-line {
     margin: 0 20px 0 20px;
   }
 
@@ -117,30 +129,30 @@
 
 @media screen and (max-width: 765px) {
 
-  .search__button {
+  .search-content__button {
     margin: 0 20px 0 20px;
   }
 
-  .search__form::before {
+  .search-content__form::before {
     display: none;
   }
 
-  .search__grey-line {
+  .search-content__grey-line {
     display: none;
   }
 
-  .search {
+  .search-content {
     flex-direction: column;
     background: transparent;
     border: none;
   }
 
-  .search__input {
+  .search-content__input {
     padding: 26px 0 26px 19px;
     min-width: 200px;
   }
 
-  .search__form {
+  .search-content__form {
     background: #2F2F2F;
     border-radius: 9px;
     margin: 0;
@@ -151,7 +163,7 @@
 
 @media screen and (max-width: 430px) {
 
-  .search,
+  .search-content,
   .search__bottom-line {
     max-width: calc(100% - 20px);
   }
