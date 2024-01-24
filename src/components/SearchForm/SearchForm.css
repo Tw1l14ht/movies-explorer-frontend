@@ -5,7 +5,7 @@
   flex-direction: column;
 }
 
-.search-content {
+.search__content {
   max-width: 1140px;
   margin-top: 70px;
   border-radius: 9px;
@@ -17,7 +17,7 @@
   flex-direction: row;
 }
 
-.search-content__form {
+.search__form {
   width: 100%;
   display: flex;
   position: relative;
@@ -25,7 +25,7 @@
   margin-right: 10px;
 }
 
-.search-content__input {
+.search__input {
   width: 100%;
   outline: none;
   padding: 26px 0 26px 63px;
@@ -40,16 +40,16 @@
   min-width: 419px;
 }
 
-.search-content__input:focus {
+.search__input:focus {
   border: 1px solid #4286f486;
   border-radius: 10px;
 }
 
-.search-content__input::placeholder {
+.search__input::placeholder {
   color: #8b8b8b;
 }
 
-.search-content__button {
+.search__button {
   border: none;
   color: #FFF;
   text-align: center;
@@ -64,11 +64,11 @@
   transition: opacity 0.3s ease;
 }
 
-.search-content__button:hover {
+.search__button:hover {
   opacity: 0.8;
 }
 
-.search-content__form::before {
+.search__form::before {
   content: "";
   width: 34px;
   height: 34px;
@@ -83,7 +83,7 @@
   box-sizing: border-box;
 }
 
-.search-content__grey-line {
+.search__grey-line {
   width: 1px;
   height: 40px;
   flex-shrink: 0;
@@ -101,7 +101,7 @@
 
 @media screen and (max-width: 1200px) {
 
-  .search-content,
+  .search__content,
   .search__bottom-line {
     max-width: calc(100% - 60px);
   }
@@ -109,7 +109,7 @@
 
 
 @media screen and (max-width: 800px) {
-  .search-content {
+  .search__content {
     margin-top: 80px;
   }
 
@@ -117,11 +117,11 @@
     margin-top: 109px;
   }
 
-  .search-content__form {
+  .search__form {
     margin-right: 0;
   }
 
-  .search-content__grey-line {
+  .search__grey-line {
     margin: 0 20px 0 20px;
   }
 
@@ -129,30 +129,30 @@
 
 @media screen and (max-width: 765px) {
 
-  .search-content__button {
+  .search__button {
     margin: 0 20px 0 20px;
   }
 
-  .search-content__form::before {
+  .search__form::before {
     display: none;
   }
 
-  .search-content__grey-line {
+  .search__grey-line {
     display: none;
   }
 
-  .search-content {
+  .search__content {
     flex-direction: column;
     background: transparent;
     border: none;
   }
 
-  .search-content__input {
+  .search__input {
     padding: 26px 0 26px 19px;
     min-width: 200px;
   }
 
-  .search-content__form {
+  .search__form {
     background: #2F2F2F;
     border-radius: 9px;
     margin: 0;
@@ -163,7 +163,7 @@
 
 @media screen and (max-width: 430px) {
 
-  .search-content,
+  .search__content,
   .search__bottom-line {
     max-width: calc(100% - 20px);
   }
