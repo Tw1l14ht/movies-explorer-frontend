@@ -1,0 +1,26 @@
+@import url(../../vendor/fonts/fonts.css);
+
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  font-family: "Inter", Arial, sans-serif;
+  color: #FFFFFF;
+  background-color: #202020;
+  min-height: 100vh;
+  min-width: 320px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+.app__noScroll{
+  position: fixed;
+  overflow-y: scroll;
+}
