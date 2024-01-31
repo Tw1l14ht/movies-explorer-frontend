@@ -2,41 +2,79 @@ import './MoviesCardList.css';
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
+import { getSavedMovieCard } from '../../utils/moviesFuncs.js';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovie}) {
   const location = useLocation();
-
+  const [showMovieList, setShowMovieList] = useState([]);
+  const [paramsOfList, setParamsOfList] = useState({all: movies.length, add: 4});
   const [screenWidth, setScreenWidth] = useState(
     document.documentElement.clientWidth
   );
-
+  
   const handleResizeWidth = useCallback(() => {
     setScreenWidth(document.documentElement.clientWidth);
   }, [setScreenWidth]);
 
   useEffect(() => {
-    window.addEventListener('resize', handleResizeWidth);
+    let timer
+
+    window.addEventListener('resize', resize);
+
+    function resize() {
+      if (!timer) {
+        timer = null;
+        timer = setTimeout(() => {
+          handleResizeWidth();
+        }, 1000);
+      }
+    }
   }, [handleResizeWidth]);
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      if (screenWidth > 1200) {
+        setParamsOfList({all: 16, add: 4});
+      } else if (screenWidth <= 1200 && screenWidth > 1116) {
+        setParamsOfList({all: 15, add: 3});
+      } else if (screenWidth <= 1116 && screenWidth > 765) {
+        setParamsOfList({all: 8, add: 2});
+      } else {
+        setParamsOfList({all: 5, add: 2});
+      }
+    }
+  }, [screenWidth,  location.pathname, paramsOfList.add, paramsOfList.all]);
+
+  useEffect(() => {
+    if (movies.length) {
+      const res = movies.filter((item, i) => i < paramsOfList.all);
+      setShowMovieList(res);
+    }
+  }, [movies, paramsOfList.all, paramsOfList.add]);
+
+
+  function handleClickMoreMovies() {
+    const arrLenght = showMovieList.length
+    const newCards = movies.slice(arrLenght, arrLenght + paramsOfList.add);
+    setShowMovieList([...showMovieList, ...newCards]);
+
+  }
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {screenWidth > 915 &&
-          movies
-            .slice(0, 16)
-            .map((card) => <MoviesCard key={card._id} card={card} />)}
-        {screenWidth >= 584 &&
-          screenWidth < 918 &&
-          movies
-            .slice(0, 8)
-            .map((card) => <MoviesCard key={card._id} card={card} />)}
-        {screenWidth < 586 &&
-          movies
-            .slice(0, 5)
-            .map((card) => <MoviesCard key={card._id} card={card} />)}
+        {showMovieList.map(cardMovie => (
+          <MoviesCard
+            key={cardMovie.id || cardMovie._id}
+            saved={getSavedMovieCard(savedMovies, cardMovie)}
+            card={cardMovie}
+            handleLikeMovie={handleLikeMovie}
+            handleDeleteMovie={handleDeleteMovie}
+          />
+        ))}
       </ul>
-      {location.pathname === "/movies" && (
-        <button className="movies-card-list__more-btn">Ещё</button>
+      {location.pathname === '/movies' && showMovieList.length >= 5 && showMovieList.length < movies.length && (
+        <button className="movies-card-list__more-btn" onClick={handleClickMoreMovies}>Ещё</button>
       )}
     </section>
   )
