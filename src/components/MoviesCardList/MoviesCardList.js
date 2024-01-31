@@ -6,7 +6,7 @@ import { getSavedMovieCard } from '../../utils/moviesFuncs.js';
 
 function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovie}) {
   const location = useLocation();
-  const [showMovieList, setShowMovieList] = useState([]);
+  const [displayList, setDisplayList] = useState([]);
   const [paramsOfList, setParamsOfList] = useState({all: movies.length, add: 4});
   const [screenWidth, setScreenWidth] = useState(
     document.documentElement.clientWidth
@@ -48,22 +48,22 @@ function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovi
   useEffect(() => {
     if (movies.length) {
       const res = movies.filter((item, i) => i < paramsOfList.all);
-      setShowMovieList(res);
+      setDisplayList(res);
     }
   }, [movies, paramsOfList.all, paramsOfList.add]);
 
 
   function handleClickMoreMovies() {
-    const arrLenght = showMovieList.length
+    const arrLenght = displayList.length
     const newCards = movies.slice(arrLenght, arrLenght + paramsOfList.add);
-    setShowMovieList([...showMovieList, ...newCards]);
+    setDisplayList([...displayList, ...newCards]);
 
   }
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {showMovieList.map(cardMovie => (
+        {displayList.map(cardMovie => (
           <MoviesCard
             key={cardMovie.id || cardMovie._id}
             saved={getSavedMovieCard(savedMovies, cardMovie)}
@@ -73,7 +73,7 @@ function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovi
           />
         ))}
       </ul>
-      {location.pathname === '/movies' && showMovieList.length >= 5 && showMovieList.length < movies.length && (
+      {location.pathname === '/movies' && displayList.length >= 5 && displayList.length < movies.length && (
         <button className="movies-card-list__more-btn" onClick={handleClickMoreMovies}>Ещё</button>
       )}
     </section>

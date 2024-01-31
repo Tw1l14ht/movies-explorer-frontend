@@ -15,16 +15,16 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
 
   const [filter, setFilter] = useState(false);
   const [responseMovies, setResponseMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const [NotFound, setNotFound] = useState(false);
   const [fullMoviesList, setfullMoviesList] = useState([]);
   const [errorText, setErrorText] = useState('')
 
-  function handleSetFilteredMovies(movies, userRequest, shortMoviesCheckbox) {
+  function setFilteredMovies(movies, userRequest, shortMoviesCheckbox) {
     const moviesList = filterMovies(movies, userRequest, shortMoviesCheckbox);
     setNothingToSearch(moviesList, setNotFound);
     setResponseMovies(moviesList);
-    setFilteredMovies(shortMoviesCheckbox ? (filterShortMovies(moviesList, setNotFound)) : moviesList);
+    setFilteredList(shortMoviesCheckbox ? (filterShortMovies(moviesList, setNotFound)) : moviesList);
     localStorage.setItem(`movies ${currentUser.email}`, JSON.stringify(moviesList));
   }
 
@@ -36,24 +36,24 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
       moviesApi.getMovies()
         .then(movies => {
           setfullMoviesList(movies);
-          handleSetFilteredMovies(fixMovies(movies), userRequest, filter);
+          setFilteredMovies(fixMovies(movies), userRequest, filter);
         })
-        .catch(() =>{
-          console.log("Ошибка");
+        .catch((err) =>{
+          console.log(err);
           setErrorText('Произошла ошибка. Подождите немного и попробуйте ещё раз');
         })
         .finally(() => setIsLoad(false));
     } else {
-      handleSetFilteredMovies(fullMoviesList, userRequest, filter);
+      setFilteredMovies(fullMoviesList, userRequest, filter);
     }
   }
 
   function handleShortFilms() {
     setFilter(!filter);
     if (!filter) {
-      setFilteredMovies(filterShortMovies(responseMovies, setNotFound));
+      setFilteredList(filterShortMovies(responseMovies, setNotFound));
     } else {
-      setFilteredMovies(responseMovies);
+      setFilteredList(responseMovies);
       setNothingToSearch(responseMovies, setNotFound);
     }
     localStorage.setItem(`filterCheckbox ${currentUser.email}`, !filter);
@@ -74,9 +74,9 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
       setResponseMovies(movies);
       setNothingToSearch(movies, setNotFound);
       if ( localStorage.getItem(`filterCheckbox ${currentUser.email}`) === 'true') {
-        setFilteredMovies(filterShortMovies(movies, setNotFound));
+        setFilteredList(filterShortMovies(movies, setNotFound));
       } else {
-        setFilteredMovies(movies);
+        setFilteredList(movies);
       }
     }
   }, [currentUser]);
@@ -86,7 +86,7 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
       <Header theme={true} login={loggedIn} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
       <main className="movies">
         <SearchForm handleSearchSubmit={handleSearchSubmit} handleShortFilms={handleShortFilms} filter={filter} />
-        {NotFound ? (<NothingWasFound text={errorText !== '' ? errorText : 'Фильмы не найдены'} />) : (<MoviesCardList handleDeleteMovie={handleDeleteMovie} movies={filteredMovies} savedMovies={savedMovies} handleLikeMovie={handleLikeMovie} />)}
+        {NotFound ? (<NothingWasFound text={errorText !== '' ? errorText : 'Фильмы не найдены'} />) : (<MoviesCardList handleDeleteMovie={handleDeleteMovie} movies={filteredList} savedMovies={savedMovies} handleLikeMovie={handleLikeMovie} />)}
       </main>
       <Footer />
     </>
