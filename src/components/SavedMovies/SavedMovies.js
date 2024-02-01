@@ -31,7 +31,7 @@ function SavedMovies({ loggedIn, onClickBar, isNavBarOpened, savedMovies, handle
   }
 
   function handleSearchSubmit(userRequest) {
-    const moviesList = filterMovies(savedMovies, userRequest, filter);
+    const moviesList = filterMovies(savedMovies, userRequest, filter, setNotFound);
     setNothingToSearch(moviesList, setNotFound)
     setfilteredList(moviesList);
     setDisplayMovies(moviesList);

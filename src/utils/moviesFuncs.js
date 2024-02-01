@@ -1,6 +1,6 @@
 import { DURATION } from './constants.js';
 
-function filterMovies(movies, userRequest, shortMoviesCheckbox) {
+function filterMovies(movies, userRequest, shortMoviesCheckbox, setNotFound) {
   const responseMovies = movies.filter((movie) => {
     const movieRu = String(movie.nameRU).toLowerCase().trim();
     const movieEn = String(movie.nameEN).toLowerCase().trim();
@@ -9,7 +9,7 @@ function filterMovies(movies, userRequest, shortMoviesCheckbox) {
   });
 
   if (shortMoviesCheckbox) {
-    return filterShortMovies(responseMovies);
+    return filterShortMovies(responseMovies, setNotFound);
   } else {
     return responseMovies;
   }

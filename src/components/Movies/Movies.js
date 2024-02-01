@@ -21,11 +21,13 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
   const [errorText, setErrorText] = useState('')
 
   function setFilteredMovies(movies, userRequest, shortMoviesCheckbox) {
-    const moviesList = filterMovies(movies, userRequest, shortMoviesCheckbox);
+    const moviesList = filterMovies(movies, userRequest, shortMoviesCheckbox, setNotFound);
     setNothingToSearch(moviesList, setNotFound);
     setResponseMovies(moviesList);
+    console.log(responseMovies);
     setFilteredList(shortMoviesCheckbox ? (filterShortMovies(moviesList, setNotFound)) : moviesList);
     localStorage.setItem(`movies ${currentUser.email}`, JSON.stringify(moviesList));
+    console.log(filteredList);
   }
 
   function handleSearchSubmit(userRequest) {
@@ -37,6 +39,7 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
         .then(movies => {
           setfullMoviesList(movies);
           setFilteredMovies(fixMovies(movies), userRequest, filter);
+          localStorage.setItem(`fullList ${currentUser.email}`, JSON.stringify(movies));
         })
         .catch((err) =>{
           console.log(err);
@@ -69,6 +72,10 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
   }, [currentUser]);
 
   useEffect(() => {
+    if(localStorage.getItem(`fullList ${currentUser.email}`)) {
+      const allMovies = JSON.parse(localStorage.getItem(`fullList ${currentUser.email}`));
+      setfullMoviesList(allMovies);
+    }
     if (localStorage.getItem(`movies ${currentUser.email}`)) {
       const movies = JSON.parse(localStorage.getItem(`movies ${currentUser.email}`));
       setResponseMovies(movies);

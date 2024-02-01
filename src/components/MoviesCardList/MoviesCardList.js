@@ -3,11 +3,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { getSavedMovieCard } from '../../utils/moviesFuncs.js';
+import { paramsOfMoviesList } from '../../utils/constants.js';
 
 function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovie}) {
   const location = useLocation();
+  const [isMount, setIsMount] = useState(true);
+  const {fourCard, threeCard, twoCard, oneCard} = paramsOfMoviesList;
   const [displayList, setDisplayList] = useState([]);
-  const [paramsOfList, setParamsOfList] = useState({all: movies.length, add: 4});
+  const [paramsOfList, setParamsOfList] = useState({all: savedMovies.length, add: 4});
   const [screenWidth, setScreenWidth] = useState(
     document.documentElement.clientWidth
   );
@@ -29,28 +32,30 @@ function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovi
         }, 1000);
       }
     }
-  }, [handleResizeWidth]);
+    return () => window.removeEventListener('resize', resize);
+  }, [handleResizeWidth,screenWidth]);
 
   useEffect(() => {
     if (location.pathname === '/movies') {
-      if (screenWidth > 1200) {
-        setParamsOfList({all: 16, add: 4});
-      } else if (screenWidth <= 1200 && screenWidth > 1116) {
-        setParamsOfList({all: 15, add: 3});
-      } else if (screenWidth <= 1116 && screenWidth > 765) {
-        setParamsOfList({all: 8, add: 2});
+      if (screenWidth > fourCard.width) {
+        setParamsOfList(fourCard.params);
+      } else if (screenWidth <= fourCard.width && screenWidth > threeCard.width) {
+        setParamsOfList(threeCard.params);
+      } else if (screenWidth <= threeCard.width && screenWidth > twoCard.width) {
+        setParamsOfList(twoCard.params);
       } else {
-        setParamsOfList({all: 5, add: 2});
+        setParamsOfList(oneCard.params);
       }
+      return () => setIsMount(false);
     }
-  }, [screenWidth,  location.pathname, paramsOfList.add, paramsOfList.all]);
+  }, [screenWidth, isMount, location.pathname, fourCard, threeCard, twoCard, oneCard]);
 
   useEffect(() => {
     if (movies.length) {
       const res = movies.filter((item, i) => i < paramsOfList.all);
       setDisplayList(res);
     }
-  }, [movies, paramsOfList.all, paramsOfList.add]);
+  }, [movies, paramsOfList.all]);
 
 
   function handleClickMoreMovies() {

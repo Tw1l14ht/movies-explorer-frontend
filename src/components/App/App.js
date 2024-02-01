@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Main from '../Main/Main'
 import './App.css';
 import Register from '../Register/Register';
@@ -15,12 +15,14 @@ import Preloader from '../Preloader/Preloader';
 
 
 function App() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isNavBarOpened, setisNavBarOpened] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [authError, setAuthError] = React.useState(false);
+  const [regError, setRegError] = React.useState(false);
   const [editProfileError, setEditProfileError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const [isLoad, setIsLoad] = React.useState(false);
@@ -30,7 +32,7 @@ function App() {
   };
 
   function goHome() {
-    navigate("/", { replace: true });
+    navigate(-1);
   };
 
   function handleRegUser(name, email, password) {
@@ -38,11 +40,13 @@ function App() {
       .then((data) => {
         if (data) {
           handleAuthUser(email, password);
+          setRegError(false);
           setAuthError(false);
         }
       })
       .catch((err) => {
-        setAuthError(true);
+        setRegError(true);
+        setAuthError(false);
         console.log(err);
       });
   }
@@ -59,6 +63,7 @@ function App() {
       })
       .catch((err) => {
         setAuthError(true);
+        setRegError(false);
         console.log(err);
       });
   }
@@ -126,18 +131,19 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
+    const pathName = location.pathname;
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       mainApi.checkToken(jwt)
         .then((data) => {
           if (data) {
             setLoggedIn(true);
-            navigate("/movies", { replace: true });
+            navigate(pathName, { replace: true });
           }
         })
         .catch((err) => console.log(err));
     }
-  }, [loggedIn]);
+  }, []);
 
   React.useEffect(() => {
     if (loggedIn && currentUser) {
@@ -158,8 +164,8 @@ function App() {
       <div className={`app app__${isNavBarOpened ? 'noScroll' : ''}`}>
         <Routes>
           <Route path="/" element={<Main loggedIn={loggedIn} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />} />
-          <Route path="/signup" element={<Register authError={authError} handleRegUser={handleRegUser} />} />
-          <Route path="/signin" element={<Login authError={authError} handleAuthUser={handleAuthUser} />} />
+          <Route path="/signup" element={loggedIn ? <Navigate to="/" replace /> : <Register authError={regError} handleRegUser={handleRegUser} />} />
+          <Route path="/signin" element={loggedIn ? <Navigate to="/" replace /> : <Login authError={authError} handleAuthUser={handleAuthUser} />} />
           <Route path="/movies" element={<ProtectedRouteElement element={Movies}
             handleDeleteMovie={handleDeleteMovie}
             setIsLoad={setIsLoad}
@@ -184,7 +190,7 @@ function App() {
             isNavBarOpened={isNavBarOpened} />} />
           <Route path="*" element={<NotFound goHome={goHome} />} />
         </Routes>
-        <Preloader load={isLoad}/> 
+        <Preloader load={isLoad} />
       </div>
     </CurrentUserContext.Provider>
   );
