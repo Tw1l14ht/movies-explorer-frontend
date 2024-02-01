@@ -26,6 +26,7 @@ function App() {
   const [editProfileError, setEditProfileError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const [isLoad, setIsLoad] = React.useState(false);
+  const [isDisabled, setIsDisabled] = React.useState(false);
 
   function onClickBar(isNavBarOpened) {
     setisNavBarOpened(!isNavBarOpened);
@@ -36,6 +37,7 @@ function App() {
   };
 
   function handleRegUser(name, email, password) {
+    setIsDisabled(true);
     mainApi.createUser(name, email, password)
       .then((data) => {
         if (data) {
@@ -48,10 +50,12 @@ function App() {
         setRegError(true);
         setAuthError(false);
         console.log(err);
-      });
+      })
+      .finally(()=> setIsDisabled(false));
   }
 
   function handleAuthUser(email, password) {
+    setIsDisabled(true);
     mainApi.login(email, password)
       .then((data) => {
         if (data.token) {
@@ -65,7 +69,8 @@ function App() {
         setAuthError(true);
         setRegError(false);
         console.log(err);
-      });
+      })
+      .finally(()=> setIsDisabled(false));
   }
 
   function handleSingOut() {
@@ -164,8 +169,8 @@ function App() {
       <div className={`app app__${isNavBarOpened ? 'noScroll' : ''}`}>
         <Routes>
           <Route path="/" element={<Main loggedIn={loggedIn} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />} />
-          <Route path="/signup" element={loggedIn ? <Navigate to="/" replace /> : <Register authError={regError} handleRegUser={handleRegUser} />} />
-          <Route path="/signin" element={loggedIn ? <Navigate to="/" replace /> : <Login authError={authError} handleAuthUser={handleAuthUser} />} />
+          <Route path="/signup" element={loggedIn ? <Navigate to="/" replace /> : <Register isDisabled={isDisabled} authError={regError} handleRegUser={handleRegUser} />} />
+          <Route path="/signin" element={loggedIn ? <Navigate to="/" replace /> : <Login isDisabled={isDisabled} authError={authError} handleAuthUser={handleAuthUser} />} />
           <Route path="/movies" element={<ProtectedRouteElement element={Movies}
             handleDeleteMovie={handleDeleteMovie}
             setIsLoad={setIsLoad}

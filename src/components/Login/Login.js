@@ -5,7 +5,7 @@ import logo from '../../images/logo.svg';
 import useForm from '../../hooks/useForm';
 import NothingWasFound from '../NothigWasFound/NothigWasFound';
 
-export default function Login({handleAuthUser, authError}) {
+export default function Login({handleAuthUser, authError, isDisabled}) {
   const { values, handleChange, resetForm, errors, isValid } = useForm();
 
 
@@ -29,17 +29,17 @@ export default function Login({handleAuthUser, authError}) {
         <div className="login__inputs-container">
           <label className="login__label">
             <span className="login__label-text">E-mail</span>
-            <input name="email" className='login__input' onChange={handleChange} value={values.email || ''} type="email" required />
+            <input disabled={isDisabled} name="email" className='login__input' onChange={handleChange} value={values.email || ''} type="email" required />
             <span className="login__error">{errors.email || ''}</span>
           </label>
           <label className="login__label">
             <span className="login__label-text">Пароль</span>
-            <input name="password" className="login__input" onChange={handleChange} value={values.password || ''}  type="password" required minLength="2" maxLength="30" />
+            <input disabled={isDisabled} name="password" className="login__input" onChange={handleChange} value={values.password || ''}  type="password" required minLength="2" maxLength="30" />
             <span className="login__error">{errors.password || ''}</span>
           </label>
         </div>
         {authError && <NothingWasFound text={'Что-то пошло не так, попробуйте еще раз'}/>}
-        <button type="submit" className={`login__button ${!isValid && 'login__button_disabled'}`} disabled={!isValid} >
+        <button type="submit" className={`login__button ${!isValid && 'login__button_disabled'}`} disabled={!isValid || isDisabled} >
           Войти
         </button>
         <span className="login__support">
