@@ -16,11 +16,13 @@ function MoviesCard({ card, saved, handleLikeMovie, handleDeleteMovie}) {
   return (
     <li className="movies-card">
       <div className="movies-card__item">
+        <a href={card.trailerLink} className='movies-card__link' target='_blanc'>
         <img
           src={card.image}
           alt={card.title}
           className="movies-card__image"
         />
+        </a>
         <div className="movies-card__description">
           <h2 className="movies-card__title">{card.nameRU}</h2>
           {location.pathname === '/movies' && (

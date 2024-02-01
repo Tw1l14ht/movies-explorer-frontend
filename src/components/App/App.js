@@ -27,6 +27,7 @@ function App() {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [isLoad, setIsLoad] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
+  const [isProfileEdit, setIsProfileEdit] = React.useState(false);
 
   function onClickBar(isNavBarOpened) {
     setisNavBarOpened(!isNavBarOpened);
@@ -86,11 +87,13 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setEditProfileError(false);
+        setIsProfileEdit(true);
       })
       .catch((err) => {
         setEditProfileError(true);
         setErrorMessage(err);
         console.log(err);
+        setIsProfileEdit(false);
       });
   }
 
@@ -189,6 +192,7 @@ function App() {
 
           <Route path="/profile" element={<ProtectedRouteElement element={Profile}
             errorMessage={errorMessage}
+            isProfileEdit = {isProfileEdit}
             editProfileError={editProfileError}
             loggedIn={loggedIn} handleUpdateUser={handleUpdateUser}
             handleSingOut={handleSingOut} onClickBar={onClickBar}

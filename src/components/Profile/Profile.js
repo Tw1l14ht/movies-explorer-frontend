@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import NothingWasFound from '../NothigWasFound/NothigWasFound.js';
 
-function Profile({ loggedIn, handleUpdateUser, handleSingOut, onClickBar, isNavBarOpened, errorMessage, editProfileError }) {
+function Profile({ loggedIn, handleUpdateUser, handleSingOut, onClickBar, isNavBarOpened, errorMessage, editProfileError, isProfileEdit }) {
   const { values, handleChange, resetForm, errors, isValid } = useForm();
   const currentUser = React.useContext(CurrentUserContext);
   const isDisable = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
@@ -40,7 +40,7 @@ function Profile({ loggedIn, handleUpdateUser, handleSingOut, onClickBar, isNavB
             </label>
           </div>
           <div className="profile__button-container">
-          {editProfileError && <NothingWasFound text={errorMessage}/>}
+          {(editProfileError && <NothingWasFound text={errorMessage}/>) || (isProfileEdit && <NothingWasFound text={'Данные успешно изменены'}/>)}
             <button type="submit" className={`profile__button-edit ${isDisable ? 'profile__button-edit_disabled' : ''}`} disabled={isDisable}>
               Редактировать
             </button>
