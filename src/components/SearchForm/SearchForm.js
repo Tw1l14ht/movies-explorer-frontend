@@ -5,7 +5,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import useForm from "../../hooks/useForm.js";
 
-function SearchForm({ handleSearchSubmit, handleShortFilms, filter }) {
+function SearchForm({ handleSearchSubmit, handleShortFilms, filter, isDelete }) {
 
   const currentUser = useContext(CurrentUserContext);
   const location = useLocation();
@@ -14,12 +14,18 @@ function SearchForm({ handleSearchSubmit, handleShortFilms, filter }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (isValid){
+    if (isValid) {
       handleSearchSubmit(values.search);
-    }else{
+    } else {
       setErrorMessage('Нужно ввести ключевое слово.');
     }
   };
+
+  useEffect(() => {
+    if(location.pathname === '/saved-movies'){
+      values.search = '';
+    }
+  }, [isDelete]);
 
   useEffect(() => {
     setErrorMessage('')

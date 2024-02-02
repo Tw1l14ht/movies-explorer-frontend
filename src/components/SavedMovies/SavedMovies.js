@@ -15,6 +15,7 @@ function SavedMovies({ loggedIn, onClickBar, isNavBarOpened, savedMovies, handle
   const [displayMovies, setDisplayMovies] = React.useState(savedMovies); 
   const [filteredList, setfilteredList] = React.useState(displayMovies); 
   const [NotFound, setNotFound] = React.useState(false);
+  const [isDelete, setIsDelete] = React.useState(false);
 
   function handleShortFilms() {
     if (!filter) {
@@ -31,6 +32,7 @@ function SavedMovies({ loggedIn, onClickBar, isNavBarOpened, savedMovies, handle
   }
 
   function handleSearchSubmit(userRequest) {
+    setIsDelete(false);
     const moviesList = filterMovies(savedMovies, userRequest, filter, setNotFound);
     setNothingToSearch(moviesList, setNotFound)
     setfilteredList(moviesList);
@@ -38,24 +40,23 @@ function SavedMovies({ loggedIn, onClickBar, isNavBarOpened, savedMovies, handle
   }
 
   React.useEffect(() => {
-    if (localStorage.getItem(`filterCheckboxSaved ${currentUser.email}`) === 'true') {
-      setFilter(true);
+    setIsDelete(true);
+    setDisplayMovies(savedMovies);
+    console.log(isDelete);
+  }, [savedMovies]);
 
-    } else {
-      setFilter(false);
-      setDisplayMovies(savedMovies);
-    }
-  }, [savedMovies, currentUser]);
 
   React.useEffect(() => {
+    setFilter(false);
     setfilteredList(savedMovies);
+    setDisplayMovies(savedMovies);
     setNothingToSearch(savedMovies, setNotFound);
   }, [savedMovies]);
   return (
     <>
       <Header theme={true} login={loggedIn} onClickBar={onClickBar} isNavBarOpened={isNavBarOpened} />
       <main className="saved-movies">
-        <SearchForm handleSearchSubmit={handleSearchSubmit} handleShortFilms={handleShortFilms} filter={filter} />
+        <SearchForm handleSearchSubmit={handleSearchSubmit} handleShortFilms={handleShortFilms} filter={filter} isDelete={isDelete} />
         {NotFound ? (<NothingWasFound text={'Фильмы не найдены'}/>) : (<MoviesCardList handleDeleteMovie={handleDeleteMovie} movies={displayMovies} savedMovies={savedMovies} />)}
       </main>
       <Footer />
