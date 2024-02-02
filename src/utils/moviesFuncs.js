@@ -8,11 +8,8 @@ function filterMovies(movies, userRequest, shortMoviesCheckbox, setNotFound) {
     return ~movieRu.indexOf(userMovie) || ~movieEn.indexOf(userMovie);
   });
 
-  if (shortMoviesCheckbox) {
-    return filterShortMovies(responseMovies, setNotFound);
-  } else {
-    return responseMovies;
-  }
+  return responseMovies;
+
 }
 
 function fixDuration(duration) {

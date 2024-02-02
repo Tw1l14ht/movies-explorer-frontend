@@ -4,36 +4,14 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { getSavedMovieCard } from '../../utils/moviesFuncs.js';
 import { paramsOfMoviesList } from '../../utils/constants.js';
+import useWidth from '../../hooks/useWidth.js';
 
 function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovie}) {
   const location = useLocation();
-  const [isMount, setIsMount] = useState(true);
   const {fourCard, threeCard, twoCard, oneCard} = paramsOfMoviesList;
   const [displayList, setDisplayList] = useState([]);
   const [paramsOfList, setParamsOfList] = useState({all: savedMovies.length, add: 4});
-  const [screenWidth, setScreenWidth] = useState(
-    document.documentElement.clientWidth
-  );
-  
-  const handleResizeWidth = useCallback(() => {
-    setScreenWidth(document.documentElement.clientWidth);
-  }, [setScreenWidth]);
-
-  useEffect(() => {
-    let timer
-
-    window.addEventListener('resize', resize);
-
-    function resize() {
-      if (!timer) {
-        timer = null;
-        timer = setTimeout(() => {
-          handleResizeWidth();
-        }, 1000);
-      }
-    }
-    return () => window.removeEventListener('resize', resize);
-  }, [handleResizeWidth,screenWidth]);
+  const screenWidth = useWidth();
 
   useEffect(() => {
     if (location.pathname === '/movies') {
@@ -46,9 +24,8 @@ function MoviesCardList({ movies, savedMovies, handleLikeMovie, handleDeleteMovi
       } else {
         setParamsOfList(oneCard.params);
       }
-      return () => setIsMount(false);
     }
-  }, [screenWidth, isMount, location.pathname, fourCard, threeCard, twoCard, oneCard]);
+  }, [screenWidth, location.pathname, fourCard, threeCard, twoCard, oneCard]);
 
   useEffect(() => {
     if (movies.length) {

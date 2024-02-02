@@ -1,21 +1,14 @@
 import './Navigation.css';
-import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 function Navigation({ login, isNavBarOpened, onClickBar }) {
 
   const handleOnClickBar = () => {
     onClickBar(isNavBarOpened);
   }
 
-  const handleResize = () => {
-    if (window.innerWidth > 800) {
-      onClickBar(true)
-    }
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleResize)
-  })
+
+
+
 
   const activeNav = `navigation__link_active_${isNavBarOpened ? 'mobile' : 'desktop'}`;
   return (

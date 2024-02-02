@@ -24,10 +24,8 @@ function Movies({ loggedIn, savedMovies, onClickBar, isNavBarOpened, handleLikeM
     const moviesList = filterMovies(movies, userRequest, shortMoviesCheckbox, setNotFound);
     setNothingToSearch(moviesList, setNotFound);
     setResponseMovies(moviesList);
-    console.log(responseMovies);
     setFilteredList(shortMoviesCheckbox ? (filterShortMovies(moviesList, setNotFound)) : moviesList);
     localStorage.setItem(`movies ${currentUser.email}`, JSON.stringify(moviesList));
-    console.log(filteredList);
   }
 
   function handleSearchSubmit(userRequest) {
