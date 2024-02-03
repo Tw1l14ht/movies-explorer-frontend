@@ -40,6 +40,17 @@
   min-width: 419px;
 }
 
+.search__input-error{
+  position: absolute;
+  bottom: -17px;
+  left: 30px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #ee3465;
+}
+
 .search__input:focus {
   border: 1px solid #4286f486;
   border-radius: 10px;
@@ -128,7 +139,9 @@
 }
 
 @media screen and (max-width: 765px) {
-
+  .search__input-error{
+    left: 15px;
+  }
   .search__button {
     margin: 0 20px 0 20px;
   }

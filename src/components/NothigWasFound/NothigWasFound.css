@@ -1,0 +1,12 @@
+.nothig-found{
+    margin-top: 80px;
+    width: 100%;
+    max-width: 1140px;
+    margin-bottom: 80px;
+}
+
+.nothig-found__text{
+    text-align: center;
+    color: #8b8b8b;
+
+}

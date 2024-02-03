@@ -16,7 +16,6 @@
   position: relative;
   align-items: center;
   gap: 30px;
-  transition: all .4s linear;
   z-index: 3;
 }
 
